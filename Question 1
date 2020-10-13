@@ -1,0 +1,104 @@
+protocol Person{
+    var name : String {get}
+    var age : Int {get}
+    func showDetails()
+}
+
+protocol Occupation{
+    var profession : String {get}
+    var yearlySalary : Double {get}
+}
+class Employee : Person,Occupation{
+    
+    var id : Int
+    
+    var name : String
+    var age : Int
+    
+    var profession : String
+    var yearlySalary : Double
+    
+    init?(id:Int,name:String,age:Int,profession:String,yearlySalary:Double){
+        if(yearlySalary < 100000){
+            return nil
+        }
+        self.id=id
+        self.name=name
+        self.age=age
+        self.profession=profession
+        self.yearlySalary=yearlySalary
+        
+    }
+    var monthlySalary : Double {
+        get {
+            return self.yearlySalary/12
+        }
+        set(newmonthlySalary){
+            self.yearlySalary = newmonthlySalary*12
+        }
+    }
+    func showDetails(){
+        print("Id is \(self.id)")
+        print("Name is \(self.name)")
+        print("Age is \(self.age)")
+        print("Profession is \(self.profession)")
+        print("Yearly Salary is \(self.yearlySalary)")
+        print("Monthly Salary is \(self.monthlySalary)")
+    }
+}
+
+
+struct Student : Person{
+    var regNo : Int
+    
+    var name : String
+    var age : Int
+    
+    init(regNo:Int,name:String,age:Int){
+        self.regNo=regNo
+        self.name=name
+        self.age=age
+    }
+    func showDetails(){
+        print(regNo)
+        print(name)
+        print(age)
+    }
+    
+}
+
+var empobj1 = Employee(id:1234,name:"Sujith",age:21,profession:"programmer",yearlySalary:300000)
+var empobj2 = Employee(id:1235,name:"Arjun",age:24,profession:"hacker",yearlySalary:500000)
+var empobj3 = Employee(id:1236,name:"Mahesh",age:20,profession:"Doctor",yearlySalary:600000)
+var empobj4 = Employee(id:1237,name:"Prabhas",age:30,profession:"programmer",yearlySalary:150000)
+var empobj5 = Employee(id:1238,name:"Charan",age:28,profession:"labourer",yearlySalary:90000)
+var studobj1 = Student(regNo:11718790,name:"Ravi",age:22)
+var studobj2 = Student(regNo:11710485,name:"Nani",age:23)
+
+var array: [Employee] = []
+if let b = empobj1{
+    array.append(b)
+}
+if let c = empobj2{
+    array.append(c)
+}
+if let d = empobj3{
+    array.append(d)
+}
+if let e = empobj4{
+    array.append(e)
+}
+if let f = empobj5{
+    array.append(f)
+}
+else{
+    print("Yearly Salary less than 1,00,000 for empobj5. So cannot Initialize this object")
+}
+print(" ")
+print("The Employees with Profession Programmer and Monthly Salary > 20000 are : ")
+print(" ")
+for item in array{
+    if(item.profession=="programmer" && item.monthlySalary>20000){
+        item.showDetails()
+    }
+}

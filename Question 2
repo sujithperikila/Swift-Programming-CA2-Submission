@@ -1,0 +1,60 @@
+protocol Gearbox
+{
+    var gears: Int { get }
+    var currentGear: Int {get set}
+}
+
+class AutomaticVehicle: Gearbox{
+    var currentSpeed: Int
+    var currentGear: Int
+    init(currentSpeed: Int,currentGear: Int){
+        self.currentSpeed=currentSpeed
+        self.currentGear=currentGear
+    }
+    func showInitialDetails(){
+        print("Current Speed  = \(currentSpeed)")
+        print("Current Gear = \(currentGear)")
+    }
+    func changingGear() -> Int{
+        var g : Int = 0
+        switch self.currentSpeed {
+                case 0..<10:
+                    g=0
+                case 10..<20:
+                    g=1
+                case 20..<30:
+                    g=2
+                case 30..<40:
+                    g=3
+                case 40..<50:
+                    g=4
+                case 50..<60:
+                    g=5
+                case 60..<70:
+                    g=6
+                case 70..<80:
+                    g=7
+                case 80..<90:
+                    g=8
+                case 90..<100:
+                    g=9
+                default:
+                    print("Invalid Speed Given")
+        }
+        return g
+    }
+    var gears : Int = 0{
+        willSet(newvalue){}
+        didSet{}
+    }
+    
+}
+var obj1=AutomaticVehicle(currentSpeed:25,currentGear:1)
+obj1.showInitialDetails()
+obj1.gears = obj1.changingGear()
+print("CurrentSpeed is \(obj1.currentSpeed). So, Changed the Gear to \(obj1.gears)")
+print(" ")
+var obj2=AutomaticVehicle(currentSpeed:48,currentGear:3)
+obj2.showInitialDetails()
+obj2.gears = obj2.changingGear()
+print("CurrentSpeed is \(obj2.currentSpeed). So, Changed the Gear to \(obj2.gears)")
